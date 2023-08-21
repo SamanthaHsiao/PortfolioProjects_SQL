@@ -50,10 +50,10 @@ as
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(convert(int, vac.new_vaccinations)) over (Partition by dea.location order by dea.location, dea.date) as rollingpeoplevac
 			FROM Project_civid..covid_death dea
-			JOIN Project_civid..covid_vaccinations vac
-			on dea.location = vac.location and dea.date = vac.date
-			WHERE dea.continent is not null
-			-- ORDER BY 2,3
+				JOIN Project_civid..covid_vaccinations vac
+				on dea.location = vac.location and dea.date = vac.date
+				WHERE dea.continent is not null
+				-- ORDER BY 2,3
 )
 
 select *,  (rollingpeoplevac/population)*100
@@ -74,10 +74,10 @@ insert into #percectpopulationvac
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(convert(int, vac.new_vaccinations)) over (Partition by dea.location order by dea.location, dea.date) as rollingpeoplevac
 			FROM Project_civid..covid_death dea
-			JOIN Project_civid..covid_vaccinations vac
-			on dea.location = vac.location and dea.date = vac.date
-			WHERE dea.continent is not null
-			-- ORDER BY 2,3
+				JOIN Project_civid..covid_vaccinations vac
+				on dea.location = vac.location and dea.date = vac.date
+				WHERE dea.continent is not null
+				-- ORDER BY 2,3
 
 select *,  (rollingpeoplevac/population)*100
 from #percectpopulationvac
@@ -87,9 +87,9 @@ create view percectpopulationvac as
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(convert(int, vac.new_vaccinations)) over (Partition by dea.location order by dea.location, dea.date) as rollingpeoplevac
 			FROM Project_civid..covid_death dea
-			JOIN Project_civid..covid_vaccinations vac
-			on dea.location = vac.location and dea.date = vac.date
-			WHERE dea.continent is not null
+				JOIN Project_civid..covid_vaccinations vac
+				on dea.location = vac.location and dea.date = vac.date
+				WHERE dea.continent is not null
 
 
 select *
